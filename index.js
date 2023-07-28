@@ -100,7 +100,39 @@ function addDepartment() {
                 department_name: response.name
             }
             )
-            console.log(`Added ${response.departmentName} to the database`);
+            console.log(`Added ${response.name} to the database`);
+            menu()
+        })
+}
+
+function addRole() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'title',
+                message: 'What is the name of the role?'
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'What is the salary of the role?'
+            },
+            {
+                type: 'input',
+                name: 'departmentId',
+                message: 'Which department does the role belong to?'
+            },
+        ]).then(response => {
+            const query = `INSERT INTO roles SET ?`
+            db.query(
+                query, {
+                title: response.title,
+                salary: response.salary,
+                department_id: response.departmentId
+            }
+            )
+            console.log(`Added ${response.title} to the database`);
             menu()
         })
 }
