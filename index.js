@@ -53,3 +53,14 @@ function start() {
 }
 
 start()
+
+
+function allDepartments() {
+    const query = `SELECT * FROM department`;
+    db.query(query,
+        function (err, res) {
+            if (err) throw err
+            console.table(res)
+            menu()
+        })
+}
