@@ -93,14 +93,14 @@ function addDepartment() {
                 name: 'name',
                 message: 'What is the name of the department?'
             }
-        ]).then(response => {
+        ]).then((res) => {
             const query = `INSERT INTO department SET ?`
             db.query(
                 query, {
-                department_name: response.name
+                department_name: res.name
             }
             )
-            console.log(`Added ${response.name} to the database`);
+            console.log(`Added ${res.name} to the database`);
             menu()
         })
 }
@@ -123,16 +123,54 @@ function addRole() {
                 name: 'departmentId',
                 message: 'Which department does the role belong to?'
             },
-        ]).then(response => {
+        ]).then((res) => {
             const query = `INSERT INTO roles SET ?`
             db.query(
                 query, {
-                title: response.title,
-                salary: response.salary,
-                department_id: response.departmentId
+                title: res.title,
+                salary: res.salary,
+                department_id: res.departmentId
             }
             )
-            console.log(`Added ${response.title} to the database`);
+            console.log(`Added ${res.title} to the database`);
+            menu()
+        })
+}
+
+function addEmployee() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'firstName',
+                message: "What is the employee's first name?"
+            },
+            {
+                type: 'input',
+                name: 'lastName',
+                message: "What is the employee's last name?"
+            },
+            {
+                type: 'input',
+                name: 'employeeRole',
+                message: "What is the employee's role id?"
+            },
+            {
+                type: 'input',
+                name: 'manager',
+                message: "What is the employee's manager id?"
+            },
+        ]).then((res) => {
+            const query = `INSERT INTO employee SET ?`
+            db.query(
+                query, {
+                first_name: res.firstName,
+                last_name: res.lastName,
+                role_id: res.employeeRole,
+                manager_id: res.manager
+            }
+            )
+            console.log(`Added ${res.firstName} to the database`);
             menu()
         })
 }
