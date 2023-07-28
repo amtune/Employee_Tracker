@@ -64,3 +64,13 @@ function allDepartments() {
             menu()
         })
 }
+
+function allRoles() {
+    const query = `SELECT * FROM roles`;
+    db.query(query,
+        function (err, res) {
+            if (err) throw err
+            console.table(res)
+            menu()
+        })
+}
