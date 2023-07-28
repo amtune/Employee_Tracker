@@ -84,3 +84,23 @@ function allEmployees() {
             menu()
         })
 }
+
+function addDepartment() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: 'What is the name of the department?'
+            }
+        ]).then(response => {
+            const query = `INSERT INTO department SET ?`
+            db.query(
+                query, {
+                department_name: response.name
+            }
+            )
+            console.log(`Added ${response.departmentName} to the database`);
+            menu()
+        })
+}
